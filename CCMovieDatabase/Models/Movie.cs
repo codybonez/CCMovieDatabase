@@ -6,8 +6,11 @@
         public int Id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
-        public string? MotionPictureRating { get; set; }
         // TODO: how do i relate data? genres
         public DateOnly ReleaseDate { get; set; }
+        public int RatingId { get; set; }
+
+        // navigation property
+        public Rating Rating { get; set; }
     }
 }
