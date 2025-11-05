@@ -14,8 +14,13 @@ namespace CCMovieDatabase.Data
         {
         }
 
-        public DbSet<CCMovieDatabase.Models.Movie> Movie { get; set; } = default!;
-        public DbSet<CCMovieDatabase.Models.Rating> Ratings { get; set; } = default!;
+        public DbSet<Movie> Movie { get; set; } = default!;
+        public DbSet<Rating> Ratings { get; set; } = default!;
+        public DbSet<ActingCredit> ActingCredits { get; set; } = default!;
+        public DbSet<CrewCredit> CrewCredits { get; set; } = default!;
+        public DbSet<Article> Articles { get; set; } = default!;
+        public DbSet<Character> Characters { get; set; } = default!;
+        public DbSet<Person> Persons { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
