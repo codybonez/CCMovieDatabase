@@ -9,5 +9,9 @@
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
         public string Author { get; set; }
+
+        public string? ThumbnailUrl { get; set; }
+        public string ShortDescription { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }
