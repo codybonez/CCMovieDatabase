@@ -14,6 +14,36 @@ namespace CCMovieDatabase.Data
         {
         }
 
-        public DbSet<CCMovieDatabase.Models.Movie> Movie { get; set; } = default!;
+        public DbSet<Movie> Movie { get; set; } = default!;
+        public DbSet<Rating> Ratings { get; set; } = default!;
+        public DbSet<ActingCredit> ActingCredits { get; set; } = default!;
+        public DbSet<CrewCredit> CrewCredits { get; set; } = default!;
+        public DbSet<Article> Articles { get; set; } = default!;
+        public DbSet<Character> Characters { get; set; } = default!;
+        public DbSet<Person> Persons { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            var ratings = new List<Rating>
+            {
+                new Rating { RatingId = 1, Name = "PG-13" },
+                new Rating { RatingId = 2, Name = "R" },
+                new Rating { RatingId = 3, Name = "G" }
+            };
+            modelBuilder.Entity<Rating>().HasData(ratings);
+
+            // right here we seed data
+            var movies = new List<Movie>
+            {
+                new Movie { Id = 1, Title = "Shrek", ReleaseDate = new DateOnly(2001, 04, 26), Description = "A mean lord exiles fairytale creatures to the swamp of a grumpy ogre, who must go on a quest and rescue a princess for the lord in order to get his land back.", RatingId = 1 },
+                new Movie { Id = 2, Title = "Shrek 2", ReleaseDate = new DateOnly(2002, 04, 26), Description = "Shrek is back baby!", RatingId = 1 },
+
+            };
+
+            modelBuilder.Entity<Movie>().HasData(movies);
+
+        }
     }
 }

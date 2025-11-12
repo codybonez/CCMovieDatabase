@@ -10,23 +10,25 @@ using CCMovieDatabase.Models;
 
 namespace CCMovieDatabase.Controllers
 {
-    public class MoviesController : Controller
+    public class JesseController : Controller
     {
         private readonly MovieContext _context;
 
-        public MoviesController(MovieContext context)
+        public JesseController(MovieContext context)
         {
             _context = context;
         }
 
-        // GET: Movies
+        // GET: Jesse
         public async Task<IActionResult> Index()
         {
-            var movieContext = _context.Movie.Include(m => m.Rating);
+            var movieContext = _context.Movie
+                .Include(m => m.Rating)
+                .Where(m => m.Rating.Name == "G");
             return View(await movieContext.ToListAsync());
         }
 
-        // GET: Movies/Details/5
+        // GET: Jesse/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,14 +47,14 @@ namespace CCMovieDatabase.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Create
+        // GET: Jesse/Create
         public IActionResult Create()
         {
             ViewData["RatingId"] = new SelectList(_context.Ratings, "RatingId", "RatingId");
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Jesse/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -69,7 +71,7 @@ namespace CCMovieDatabase.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Jesse/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,7 +88,7 @@ namespace CCMovieDatabase.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Jesse/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -122,7 +124,7 @@ namespace CCMovieDatabase.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Jesse/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -141,7 +143,7 @@ namespace CCMovieDatabase.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Jesse/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
