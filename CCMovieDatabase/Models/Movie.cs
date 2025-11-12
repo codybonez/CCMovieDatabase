@@ -12,5 +12,8 @@
 
         // navigation property
         public Rating Rating { get; set; }
+
+        // collection
+        public virtual ICollection<Character> Characters { get; set; }
     }
 }
