@@ -54,7 +54,7 @@ namespace CCMovieDatabase.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArticleId,Title,Body,Slug,CreatedAt,ModifiedAt,Author")] Article article)
+        public async Task<IActionResult> Create([Bind("ArticleId,Title,Body,Slug,CreatedAt,ModifiedAt,Author,ThumbnailUrl,ShortDescription,IsFeatured")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace CCMovieDatabase.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArticleId,Title,Body,Slug,CreatedAt,ModifiedAt,Author")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("ArticleId,Title,Body,Slug,CreatedAt,ModifiedAt,Author,ThumbnailUrl,ShortDescription,IsFeatured")] Article article)
         {
             if (id != article.ArticleId)
             {
