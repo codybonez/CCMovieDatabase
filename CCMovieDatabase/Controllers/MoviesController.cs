@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CCMovieDatabase.Data;
 using CCMovieDatabase.Models;
+using CCMovieDatabase.Services;
 
 namespace CCMovieDatabase.Controllers
 {
@@ -14,15 +15,20 @@ namespace CCMovieDatabase.Controllers
     {
         private readonly MovieContext _context;
 
-        public MoviesController(MovieContext context)
+        public ToastCounterService ToastService { get; set; }
+
+        public MoviesController(MovieContext context, ToastCounterService toast)
         {
             _context = context;
+            ToastService = toast;
         }
 
         // GET: Movies
         public async Task<IActionResult> Index()
         {
             var movieContext = _context.Movie.Include(m => m.Rating);
+            ToastService.Increment();
+            Console.WriteLine("Yeah Toast!" + ToastService.ToastCount);
             return View(await movieContext.ToListAsync());
         }
 

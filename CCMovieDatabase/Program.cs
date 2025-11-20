@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CCMovieDatabase.Data;
+using CCMovieDatabase.Services;
 namespace CCMovieDatabase
 {
     public class Program
@@ -10,6 +11,8 @@ namespace CCMovieDatabase
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<MovieContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MovieContext") ?? throw new InvalidOperationException("Connection string 'MovieContext' not found.")));
+
+            builder.Services.AddTransient<ToastCounterService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
