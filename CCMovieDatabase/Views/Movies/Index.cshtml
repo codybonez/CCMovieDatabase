@@ -1,10 +1,12 @@
-﻿@model IEnumerable<CCMovieDatabase.Models.Movie>
+﻿@model MovieViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>@ViewData["Title"]</h1>
+
+<h3>Toast Counter: @Model.ToastCount</h3>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,22 +15,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Description
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
+                Release Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rating)
+                Rating
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Movies) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)

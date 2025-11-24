@@ -12,7 +12,7 @@ namespace CCMovieDatabase
             builder.Services.AddDbContext<MovieContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MovieContext") ?? throw new InvalidOperationException("Connection string 'MovieContext' not found.")));
 
-            builder.Services.AddTransient<ToastCounterService>();
+            builder.Services.AddSingleton<ToastCounterService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

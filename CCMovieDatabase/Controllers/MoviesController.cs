@@ -26,10 +26,19 @@ namespace CCMovieDatabase.Controllers
         // GET: Movies
         public async Task<IActionResult> Index()
         {
-            var movieContext = _context.Movie.Include(m => m.Rating);
             ToastService.Increment();
-            Console.WriteLine("Yeah Toast!" + ToastService.ToastCount);
-            return View(await movieContext.ToListAsync());
+
+            var test = _context.Movie.Include(m => m.Rating).Select(m => new Movie
+            {
+                Description = m.Description + " extra info"
+            });
+
+
+            return View(new MovieViewModel()
+            {
+                Movies = _context.Movie.Include(m => m.Rating),
+                ToastCount = ToastService.ToastCount,
+            });
         }
 
         // GET: Movies/Details/5
