@@ -4,6 +4,7 @@ using CCMovieDatabase.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CCMovieDatabase.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20251125184938_AddedProducts")]
+    partial class AddedProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,28 +162,6 @@ namespace CCMovieDatabase.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Name = "Computer Accessories"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Name = "Graphics Cards"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Name = "Monitors"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            Name = "Hard Drives"
-                        });
                 });
 
             modelBuilder.Entity("CCMovieDatabase.Models.Character", b =>
@@ -325,36 +306,6 @@ namespace CCMovieDatabase.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            CategoryId = 1,
-                            Description = "A simple mass produced keyboard",
-                            Name = "Dell Keyboard"
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            CategoryId = 2,
-                            Description = "A very expensive video card",
-                            Name = "RTX 5090"
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            CategoryId = 3,
-                            Description = "An enterprise widescreen monitor",
-                            Name = "Dell Widescreen Monitor"
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            CategoryId = 4,
-                            Description = "Western Digital Black Edition SSD",
-                            Name = "WD Black Edition SSD"
-                        });
                 });
 
             modelBuilder.Entity("CCMovieDatabase.Models.Rating", b =>

@@ -22,6 +22,8 @@ namespace CCMovieDatabase.Data
         public DbSet<Article> Articles { get; set; } = default!;
         public DbSet<Character> Characters { get; set; } = default!;
         public DbSet<Person> Persons { get; set; } = default!;
+        public DbSet<Product> Products { get; set; } = default!;
+        public DbSet<Category> Categories { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -56,6 +58,69 @@ namespace CCMovieDatabase.Data
 
             modelBuilder.Entity<Article>().HasData(articles);
 
+
+            var categories = new List<Category>()
+            {
+                new Category
+                {
+                    CategoryId = 1,
+                    Name = "Computer Accessories"
+                },
+                new Category
+                {
+                    CategoryId = 2,
+                    Name = "Graphics Cards"
+                },
+                new Category
+                {
+                    CategoryId = 3,
+                    Name = "Monitors"
+                },
+                new Category
+                {
+                    CategoryId = 4,
+                    Name = "Hard Drives"
+                }
+            };
+
+            modelBuilder.Entity<Category>().HasData(categories);
+
+            var products = new List<Product>()
+            {
+                new Product
+                {
+                    ProductId = 1,
+                    Name = "Dell Keyboard",
+                    Description = "A simple mass produced keyboard",
+                    CategoryId = 1
+                },
+                new Product
+                {
+                    ProductId = 2,
+                    Name = "RTX 5090",
+                    Description = "A very expensive video card",
+                    CategoryId = 2
+                },
+                new Product
+                {
+                    ProductId = 3,
+                    Name = "Dell Widescreen Monitor",
+                    Description = "An enterprise widescreen monitor",
+                    CategoryId = 3
+                },
+                new Product
+                {
+                    ProductId = 4,
+                    Name = "WD Black Edition SSD",
+                    Description = "Western Digital Black Edition SSD",
+                    CategoryId = 4
+                },
+            };
+
+            modelBuilder.Entity<Product>().HasData(products);
+
+            modelBuilder.Entity<Category>().Navigation(c => c.Products).AutoInclude();
+            modelBuilder.Entity<Product>().Navigation(p => p.Category).AutoInclude();
         }
     }
 }

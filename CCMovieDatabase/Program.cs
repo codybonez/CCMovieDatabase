@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using CCMovieDatabase.Data;
 using CCMovieDatabase.Services;
+using System.Text.Json.Serialization;
 namespace CCMovieDatabase
 {
     public class Program
@@ -16,6 +17,9 @@ namespace CCMovieDatabase
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+                //.AddJsonOptions(x => 
+                //    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve
+                //);
 
             var app = builder.Build();
 
