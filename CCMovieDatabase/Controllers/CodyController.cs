@@ -24,7 +24,7 @@ namespace CCMovieDatabase.Controllers
         {
             //var movieContext = _context.Movie.Include(m => m.Rating);
             //return View(await movieContext.ToListAsync());
-            var movies = _context.Movie.Take(5).ToList();
+            var movies = _context.Movie.Take(5).Skip(2).ToList();
             return View(movies);
         }
 
