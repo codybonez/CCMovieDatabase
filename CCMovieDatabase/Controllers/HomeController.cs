@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using CCMovieDatabase.Data;
 using CCMovieDatabase.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,15 +8,19 @@ namespace CCMovieDatabase.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly MovieContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MovieContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            // TODO: filter the articles by IsFeatured, returning only the most recent 4
+            var articles = _context.Articles.Take(4).ToList();
+            return View(articles);
         }
 
         public IActionResult Privacy()

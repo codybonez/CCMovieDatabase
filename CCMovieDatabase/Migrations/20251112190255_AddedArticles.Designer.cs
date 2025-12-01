@@ -4,6 +4,7 @@ using CCMovieDatabase.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CCMovieDatabase.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20251112190255_AddedArticles")]
+    partial class AddedArticles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,42 +230,18 @@ namespace CCMovieDatabase.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "James, an NYC cop, is hired by Agent K of a secret government agency that monitors extraterrestrial life on Earth. Together, they must recover an item that has been stolen by an intergalactic villain.",
+                            Description = "A mean lord exiles fairytale creatures to the swamp of a grumpy ogre, who must go on a quest and rescue a princess for the lord in order to get his land back.",
                             RatingId = 1,
-                            ReleaseDate = new DateOnly(1997, 7, 25),
-                            Title = "Men in Black"
+                            ReleaseDate = new DateOnly(2001, 4, 26),
+                            Title = "Shrek"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.",
+                            Description = "Shrek is back baby!",
                             RatingId = 1,
-                            ReleaseDate = new DateOnly(2022, 12, 16),
-                            Title = "Avatar: The Way of Water"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
-                            RatingId = 1,
-                            ReleaseDate = new DateOnly(2018, 4, 23),
-                            Title = "Avengers: Infinity War"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "A rat who can cook makes an unusual alliance with a young kitchen worker at a famous Paris restaurant.",
-                            RatingId = 3,
-                            ReleaseDate = new DateOnly(2007, 6, 28),
-                            Title = "Ratatouille"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "In order to power the city, monsters have to scare children so that they scream. However, the children are toxic to the monsters, and after a child gets through, two monsters realize things may not be what they think",
-                            RatingId = 3,
-                            ReleaseDate = new DateOnly(2001, 10, 28),
-                            Title = "Monsters, Inc."
+                            ReleaseDate = new DateOnly(2002, 4, 26),
+                            Title = "Shrek 2"
                         });
                 });
 

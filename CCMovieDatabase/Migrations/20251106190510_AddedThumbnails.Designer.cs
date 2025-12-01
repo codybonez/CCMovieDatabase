@@ -4,6 +4,7 @@ using CCMovieDatabase.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CCMovieDatabase.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20251106190510_AddedThumbnails")]
+    partial class AddedThumbnails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,15 +67,8 @@ namespace CCMovieDatabase.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsFeatured")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ShortDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Slug")
                         .IsRequired()
@@ -88,60 +84,6 @@ namespace CCMovieDatabase.Migrations
                     b.HasKey("ArticleId");
 
                     b.ToTable("Articles");
-
-                    b.HasData(
-                        new
-                        {
-                            ArticleId = 1,
-                            Author = "Jesse",
-                            Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            CreatedAt = new DateTime(2025, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsFeatured = true,
-                            ModifiedAt = new DateTime(2025, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShortDescription = "Lorem Ipsum and stuff",
-                            Slug = "hello_world",
-                            ThumbnailUrl = "https://craftypixels.com/placeholder-image/300",
-                            Title = "Welcome to CCMovieDatabase"
-                        },
-                        new
-                        {
-                            ArticleId = 2,
-                            Author = "Jesse",
-                            Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            CreatedAt = new DateTime(2025, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsFeatured = true,
-                            ModifiedAt = new DateTime(2025, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShortDescription = "Lorem Ipsum and stuff",
-                            Slug = "hello_world2",
-                            ThumbnailUrl = "https://craftypixels.com/placeholder-image/300",
-                            Title = "More Movies Added"
-                        },
-                        new
-                        {
-                            ArticleId = 3,
-                            Author = "Jesse",
-                            Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            CreatedAt = new DateTime(2025, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsFeatured = true,
-                            ModifiedAt = new DateTime(2025, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShortDescription = "Lorem Ipsum and stuff",
-                            Slug = "hello_world3",
-                            ThumbnailUrl = "https://craftypixels.com/placeholder-image/300",
-                            Title = "For the love of movies"
-                        },
-                        new
-                        {
-                            ArticleId = 4,
-                            Author = "Jesse",
-                            Body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            CreatedAt = new DateTime(2025, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsFeatured = true,
-                            ModifiedAt = new DateTime(2025, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ShortDescription = "Lorem Ipsum and stuff",
-                            Slug = "hello_world4",
-                            ThumbnailUrl = "https://craftypixels.com/placeholder-image/300",
-                            Title = "I wrote this"
-                        });
                 });
 
             modelBuilder.Entity("CCMovieDatabase.Models.Character", b =>
@@ -227,42 +169,18 @@ namespace CCMovieDatabase.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "James, an NYC cop, is hired by Agent K of a secret government agency that monitors extraterrestrial life on Earth. Together, they must recover an item that has been stolen by an intergalactic villain.",
+                            Description = "A mean lord exiles fairytale creatures to the swamp of a grumpy ogre, who must go on a quest and rescue a princess for the lord in order to get his land back.",
                             RatingId = 1,
-                            ReleaseDate = new DateOnly(1997, 7, 25),
-                            Title = "Men in Black"
+                            ReleaseDate = new DateOnly(2001, 4, 26),
+                            Title = "Shrek"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.",
+                            Description = "Shrek is back baby!",
                             RatingId = 1,
-                            ReleaseDate = new DateOnly(2022, 12, 16),
-                            Title = "Avatar: The Way of Water"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
-                            RatingId = 1,
-                            ReleaseDate = new DateOnly(2018, 4, 23),
-                            Title = "Avengers: Infinity War"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "A rat who can cook makes an unusual alliance with a young kitchen worker at a famous Paris restaurant.",
-                            RatingId = 3,
-                            ReleaseDate = new DateOnly(2007, 6, 28),
-                            Title = "Ratatouille"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "In order to power the city, monsters have to scare children so that they scream. However, the children are toxic to the monsters, and after a child gets through, two monsters realize things may not be what they think",
-                            RatingId = 3,
-                            ReleaseDate = new DateOnly(2001, 10, 28),
-                            Title = "Monsters, Inc."
+                            ReleaseDate = new DateOnly(2002, 4, 26),
+                            Title = "Shrek 2"
                         });
                 });
 
