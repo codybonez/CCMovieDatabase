@@ -22,10 +22,8 @@ namespace CCMovieDatabase.Controllers
         // GET: Cody
         public async Task<IActionResult> Index()
         {
-            //var movieContext = _context.Movie.Include(m => m.Rating);
-            //return View(await movieContext.ToListAsync());
-            var movies = _context.Movie.Take(5).Skip(2).ToList();
-            return View(movies);
+            var movieContext = _context.Movie.Include(m => m.Rating).Skip(2).Take(5); ;
+            return View(await movieContext.ToListAsync());
         }
 
         // GET: Cody/Details/5
@@ -59,7 +57,7 @@ namespace CCMovieDatabase.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,ReleaseDate,RatingId")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,ReleaseDate,RatingId,ThumbnailURL")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +91,7 @@ namespace CCMovieDatabase.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ReleaseDate,RatingId")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ReleaseDate,RatingId,ThumbnailURL")] Movie movie)
         {
             if (id != movie.Id)
             {

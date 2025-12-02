@@ -4,85 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Cody's movie editor</h1>
+<h1>Index</h1>
 
-@* <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="https://m.media-amazon.com/images/I/71kp6CO+JsL.jpg" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title">@Html.DisplayFor()</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-</div> *@
-@foreach (var item in Model)
-{
-    <div class="row">
-
-
-        <div class="col-sm-3">
-
-            <div class="card">
-                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/fb/Men_in_Black_Poster.jpg/250px-Men_in_Black_Poster.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Men in Black</h5>
-                    <p class="card-text"></p>
-                    <a class="btn btn-primary" asp-controller="Movies" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/5/54/Avatar_The_Way_of_Water_poster.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Avatar: The Way of Water</h5>
-                    <p class="card-text"></p>
-                    <a class="btn btn-primary" asp-controller="Movies" asp-action="">Details</a>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/4/4d/Avengers_Infinity_War_poster.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Avengers: Infinity War</h5>
-                    <p class="card-text"></p>
-                    <a class="btn btn-primary" asp-controller="Movies" asp-action="">Details</a>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/5/50/RatatouillePoster.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Ratatouille</h5>
-                    <p class="card-text"></p>
-                    <a class="btn btn-primary" asp-controller="Movies" asp-action="">Details</a>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/en/6/63/Monsters_Inc.JPG" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Monsters, Inc.</h5>
-                    <p class="card-text"></p>
-                    <a class="btn btn-primary" asp-controller="Movies" asp-action="">Details</a>
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-
-}
-@* 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -97,6 +20,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThumbnailURL)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rating)
@@ -117,6 +43,15 @@
                 @Html.DisplayFor(modelItem => item.ReleaseDate)
             </td>
             <td>
+                    @if (item.ThumbnailURL != null)
+                    {
+                        <img src="@item.ThumbnailURL" />
+                    } else
+                    {
+                        <p>No Thumbnail</p>
+                    }
+                </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Rating.RatingId)
             </td>
             <td>
@@ -127,4 +62,4 @@
         </tr>
 }
     </tbody>
-</table> *@
+</table>
