@@ -9,6 +9,7 @@
         // TODO: how do i relate data? genres
         public DateOnly ReleaseDate { get; set; }
         public int RatingId { get; set; }
+        public string? ThumbnailURL { get; set; }
 
         // navigation property
         public Rating Rating { get; set; }

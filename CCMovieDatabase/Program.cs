@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CCMovieDatabase.Data;
+using CCMovieDatabase.Services;
+using System.Text.Json.Serialization;
 namespace CCMovieDatabase
 {
     public class Program
@@ -11,8 +13,13 @@ namespace CCMovieDatabase
             builder.Services.AddDbContext<MovieContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MovieContext") ?? throw new InvalidOperationException("Connection string 'MovieContext' not found.")));
 
+            builder.Services.AddSingleton<ToastCounterService>();
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+                //.AddJsonOptions(x => 
+                //    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve
+                //);
 
             var app = builder.Build();
 

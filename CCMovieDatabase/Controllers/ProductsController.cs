@@ -10,23 +10,23 @@ using CCMovieDatabase.Models;
 
 namespace CCMovieDatabase.Controllers
 {
-    public class MoviesController : Controller
+    public class ProductsController : Controller
     {
         private readonly MovieContext _context;
 
-        public MoviesController(MovieContext context)
+        public ProductsController(MovieContext context)
         {
             _context = context;
         }
 
-        // GET: Movies
+        // GET: Products
         public async Task<IActionResult> Index()
         {
-            var movieContext = _context.Movie.Include(m => m.Rating);
+            var movieContext = _context.Products.Include(p => p.Category);
             return View(await movieContext.ToListAsync());
         }
 
-        // GET: Movies/Details/5
+        // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace CCMovieDatabase.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
-                .Include(m => m.Rating)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(product);
         }
 
-        // GET: Movies/Create
+        // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["RatingId"] = new SelectList(_context.Ratings, "RatingId", "RatingId");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,ReleaseDate,RatingId,ThumbnailURL")] Movie movie)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,Description,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RatingId"] = new SelectList(_context.Ratings, "RatingId", "RatingId", movie.RatingId);
-            return View(movie);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", product.CategoryId);
+            return View(product);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace CCMovieDatabase.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie == null)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            ViewData["RatingId"] = new SelectList(_context.Ratings, "RatingId", "RatingId", movie.RatingId);
-            return View(movie);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", product.CategoryId);
+            return View(product);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ReleaseDate,RatingId,ThumbnailURL")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Description,CategoryId")] Product product)
         {
-            if (id != movie.Id)
+            if (id != product.ProductId)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace CCMovieDatabase.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.Id))
+                    if (!ProductExists(product.ProductId))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace CCMovieDatabase.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RatingId"] = new SelectList(_context.Ratings, "RatingId", "RatingId", movie.RatingId);
-            return View(movie);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", product.CategoryId);
+            return View(product);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,35 +130,35 @@ namespace CCMovieDatabase.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
-                .Include(m => m.Rating)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(product);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie != null)
+            var product = await _context.Products.FindAsync(id);
+            if (product != null)
             {
-                _context.Movie.Remove(movie);
+                _context.Products.Remove(product);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool ProductExists(int id)
         {
-            return _context.Movie.Any(e => e.Id == id);
+            return _context.Products.Any(e => e.ProductId == id);
         }
     }
 }
