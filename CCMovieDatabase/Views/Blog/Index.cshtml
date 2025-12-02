@@ -4,80 +4,23 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Recent Posts</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Body)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Slug)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ThumbnailUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShortDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsFeatured)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Slug)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThumbnailUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFeatured)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ArticleId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ArticleId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ArticleId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img src="@item.ThumbnailUrl" class="card-img-top" alt="@item.ThumbnailUrl">
+                <div class="card-body">
+                    <h4 class="card-title">@item.Title</h4>
+                    <h6 class="card-subtitle text-muted">@item.Author</h6>
+                    <p class="card-text">@item.ShortDescription</p>
+                    <br />
+                    <a asp-controller="blog" asp-action="details" asp-route-id="@item.ArticleId" class="card-link">Read More...</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -4,6 +4,7 @@ using CCMovieDatabase.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CCMovieDatabase.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20251125184938_AddedProducts")]
+    partial class AddedProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,28 +162,6 @@ namespace CCMovieDatabase.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Name = "Computer Accessories"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Name = "Graphics Cards"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Name = "Monitors"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            Name = "Hard Drives"
-                        });
                 });
 
             modelBuilder.Entity("CCMovieDatabase.Models.Character", b =>
@@ -252,9 +233,6 @@ namespace CCMovieDatabase.Migrations
                     b.Property<DateOnly>("ReleaseDate")
                         .HasColumnType("date");
 
-                    b.Property<string>("ThumbnailURL")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -272,7 +250,6 @@ namespace CCMovieDatabase.Migrations
                             Description = "A mean lord exiles fairytale creatures to the swamp of a grumpy ogre, who must go on a quest and rescue a princess for the lord in order to get his land back.",
                             RatingId = 1,
                             ReleaseDate = new DateOnly(2001, 4, 26),
-                            ThumbnailURL = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTG_q0A0cypAsXxYlgs5J_554BrcnjeeKExlQE3ZaZUuPYv0fUd",
                             Title = "Shrek"
                         },
                         new
@@ -281,7 +258,6 @@ namespace CCMovieDatabase.Migrations
                             Description = "Shrek is back baby!",
                             RatingId = 1,
                             ReleaseDate = new DateOnly(2002, 4, 26),
-                            ThumbnailURL = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTPx7lW6h0G1O9-npEnVPL07fT74Tp6SFl0i47nxfypyVBcQFdS",
                             Title = "Shrek 2"
                         });
                 });
@@ -330,36 +306,6 @@ namespace CCMovieDatabase.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            CategoryId = 1,
-                            Description = "A simple mass produced keyboard",
-                            Name = "Dell Keyboard"
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            CategoryId = 2,
-                            Description = "A very expensive video card",
-                            Name = "RTX 5090"
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            CategoryId = 3,
-                            Description = "An enterprise widescreen monitor",
-                            Name = "Dell Widescreen Monitor"
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            CategoryId = 4,
-                            Description = "Western Digital Black Edition SSD",
-                            Name = "WD Black Edition SSD"
-                        });
                 });
 
             modelBuilder.Entity("CCMovieDatabase.Models.Rating", b =>

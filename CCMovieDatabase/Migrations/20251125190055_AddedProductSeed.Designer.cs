@@ -4,6 +4,7 @@ using CCMovieDatabase.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CCMovieDatabase.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20251125190055_AddedProductSeed")]
+    partial class AddedProductSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,9 +255,6 @@ namespace CCMovieDatabase.Migrations
                     b.Property<DateOnly>("ReleaseDate")
                         .HasColumnType("date");
 
-                    b.Property<string>("ThumbnailURL")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -272,7 +272,6 @@ namespace CCMovieDatabase.Migrations
                             Description = "A mean lord exiles fairytale creatures to the swamp of a grumpy ogre, who must go on a quest and rescue a princess for the lord in order to get his land back.",
                             RatingId = 1,
                             ReleaseDate = new DateOnly(2001, 4, 26),
-                            ThumbnailURL = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTG_q0A0cypAsXxYlgs5J_554BrcnjeeKExlQE3ZaZUuPYv0fUd",
                             Title = "Shrek"
                         },
                         new
@@ -281,7 +280,6 @@ namespace CCMovieDatabase.Migrations
                             Description = "Shrek is back baby!",
                             RatingId = 1,
                             ReleaseDate = new DateOnly(2002, 4, 26),
-                            ThumbnailURL = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTPx7lW6h0G1O9-npEnVPL07fT74Tp6SFl0i47nxfypyVBcQFdS",
                             Title = "Shrek 2"
                         });
                 });

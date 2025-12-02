@@ -22,6 +22,8 @@ namespace CCMovieDatabase.Data
         public DbSet<Article> Articles { get; set; } = default!;
         public DbSet<Character> Characters { get; set; } = default!;
         public DbSet<Person> Persons { get; set; } = default!;
+        public DbSet<Product> Products { get; set; } = default!;
+        public DbSet<Category> Categories { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,9 +40,8 @@ namespace CCMovieDatabase.Data
             // right here we seed data
             var movies = new List<Movie>
             {
-                new Movie { Id = 1, Title = "Shrek", ReleaseDate = new DateOnly(2001, 04, 26), Description = "A mean lord exiles fairytale creatures to the swamp of a grumpy ogre, who must go on a quest and rescue a princess for the lord in order to get his land back.", RatingId = 1 },
-                new Movie { Id = 2, Title = "Shrek 2", ReleaseDate = new DateOnly(2002, 04, 26), Description = "Shrek is back baby!", RatingId = 1 },
-
+                new Movie { Id = 1, Title = "Shrek", ReleaseDate = new DateOnly(2001, 04, 26), Description = "A mean lord exiles fairytale creatures to the swamp of a grumpy ogre, who must go on a quest and rescue a princess for the lord in order to get his land back.", RatingId = 1, ThumbnailURL = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTG_q0A0cypAsXxYlgs5J_554BrcnjeeKExlQE3ZaZUuPYv0fUd" },
+                new Movie { Id = 2, Title = "Shrek 2", ReleaseDate = new DateOnly(2002, 04, 26), Description = "Shrek is back baby!", RatingId = 1, ThumbnailURL = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTPx7lW6h0G1O9-npEnVPL07fT74Tp6SFl0i47nxfypyVBcQFdS" },
             };
 
             modelBuilder.Entity<Movie>().HasData(movies);
@@ -56,6 +57,69 @@ namespace CCMovieDatabase.Data
 
             modelBuilder.Entity<Article>().HasData(articles);
 
+
+            var categories = new List<Category>()
+            {
+                new Category
+                {
+                    CategoryId = 1,
+                    Name = "Computer Accessories"
+                },
+                new Category
+                {
+                    CategoryId = 2,
+                    Name = "Graphics Cards"
+                },
+                new Category
+                {
+                    CategoryId = 3,
+                    Name = "Monitors"
+                },
+                new Category
+                {
+                    CategoryId = 4,
+                    Name = "Hard Drives"
+                }
+            };
+
+            modelBuilder.Entity<Category>().HasData(categories);
+
+            var products = new List<Product>()
+            {
+                new Product
+                {
+                    ProductId = 1,
+                    Name = "Dell Keyboard",
+                    Description = "A simple mass produced keyboard",
+                    CategoryId = 1
+                },
+                new Product
+                {
+                    ProductId = 2,
+                    Name = "RTX 5090",
+                    Description = "A very expensive video card",
+                    CategoryId = 2
+                },
+                new Product
+                {
+                    ProductId = 3,
+                    Name = "Dell Widescreen Monitor",
+                    Description = "An enterprise widescreen monitor",
+                    CategoryId = 3
+                },
+                new Product
+                {
+                    ProductId = 4,
+                    Name = "WD Black Edition SSD",
+                    Description = "Western Digital Black Edition SSD",
+                    CategoryId = 4
+                },
+            };
+
+            modelBuilder.Entity<Product>().HasData(products);
+
+            modelBuilder.Entity<Category>().Navigation(c => c.Products).AutoInclude();
+            modelBuilder.Entity<Product>().Navigation(p => p.Category).AutoInclude();
         }
     }
 }
