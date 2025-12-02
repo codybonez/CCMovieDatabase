@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CCMovieDatabase.Data;
 using CCMovieDatabase.Models;
-using CCMovieDatabase.Services;
 
 namespace CCMovieDatabase.Controllers
 {
@@ -15,30 +14,16 @@ namespace CCMovieDatabase.Controllers
     {
         private readonly MovieContext _context;
 
-        public ToastCounterService ToastService { get; set; }
-
-        public MoviesController(MovieContext context, ToastCounterService toast)
+        public MoviesController(MovieContext context)
         {
             _context = context;
-            ToastService = toast;
         }
 
         // GET: Movies
         public async Task<IActionResult> Index()
         {
-            ToastService.Increment();
-
-            var test = _context.Movie.Include(m => m.Rating).Select(m => new Movie
-            {
-                Description = m.Description + " extra info"
-            });
-
-
-            return View(new MovieViewModel()
-            {
-                Movies = _context.Movie.Include(m => m.Rating),
-                ToastCount = ToastService.ToastCount,
-            });
+            var movieContext = _context.Movie.Include(m => m.Rating);
+            return View(await movieContext.ToListAsync());
         }
 
         // GET: Movies/Details/5
@@ -72,7 +57,7 @@ namespace CCMovieDatabase.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,ReleaseDate,RatingId")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,ReleaseDate,RatingId,ThumbnailURL")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +91,7 @@ namespace CCMovieDatabase.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ReleaseDate,RatingId")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ReleaseDate,RatingId,ThumbnailURL")] Movie movie)
         {
             if (id != movie.Id)
             {

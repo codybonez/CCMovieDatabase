@@ -1,12 +1,10 @@
-﻿@model MovieViewModel
+﻿@model IEnumerable<CCMovieDatabase.Models.Movie>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<h3>Toast Counter: @Model.ToastCount</h3>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -15,22 +13,25 @@
     <thead>
         <tr>
             <th>
-                Title
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                Description
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                Release Date
+                @Html.DisplayNameFor(model => model.ReleaseDate)
             </th>
             <th>
-                Rating
+                @Html.DisplayNameFor(model => model.ThumbnailURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Movies) {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -40,6 +41,15 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @if (item.ThumbnailURL != null)
+                {
+                    <img src="@item.ThumbnailURL" />
+                } else
+                {
+                    <p>No Thumbnail</p>    
+                }   
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rating.RatingId)
